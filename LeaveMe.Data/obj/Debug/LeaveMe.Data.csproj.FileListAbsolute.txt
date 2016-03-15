@@ -1,0 +1,10 @@
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Data\bin\Debug\LeaveMe.Data.dll.config
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Data\bin\Debug\LeaveMe.Data.dll
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Data\bin\Debug\LeaveMe.Data.pdb
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Data\bin\Debug\EntityFramework.dll
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Data\bin\Debug\EntityFramework.xml
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Data\obj\Debug\LeaveMe.Data.csprojResolveAssemblyReference.cache
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Data\obj\Debug\LeaveMe.Data.dll
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Data\obj\Debug\LeaveMe.Data.pdb

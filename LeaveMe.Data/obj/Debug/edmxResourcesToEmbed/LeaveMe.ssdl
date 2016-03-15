@@ -1,0 +1,701 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LeaveSys.Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="LeaveType">
+    <Key>
+      <PropertyRef Name="LeaveTypeID" />
+    </Key>
+    <Property Name="LeaveTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LeaveTypeName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="LeaveTypeDescription" Type="varchar" MaxLength="250" />
+    <Property Name="LeaveDays" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="200" />
+    <Property Name="RoleDescription" Type="nvarchar" MaxLength="250" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="300" />
+    <Property Name="AccessFailedCount" Type="int" />
+    <Property Name="IsLockedOut" Type="bit" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsTerminated" Type="bit" />
+    <Property Name="TerminatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UsersDocuments">
+    <Key>
+      <PropertyRef Name="DocumentID" />
+    </Key>
+    <Property Name="DocumentID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DocumentName" Type="nvarchar" MaxLength="250" />
+    <Property Name="DocumentTypeID" Type="int" Nullable="false" />
+    <Property Name="StorePath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UsersEducation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Institute" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="CourseSpecialization" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="GPA" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="StartPeriod" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="EndPeriod" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="800" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UsersEmergencyContact">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Relationship" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="WorkMobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="Notes" Type="varchar" MaxLength="500" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UsersExperience">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="WorkTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Company" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="FromDate" Type="datetime" Nullable="false" />
+    <Property Name="ToDate" Type="datetime" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="500" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UsersLeaveApply">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LeaveTypeID" Type="int" Nullable="false" />
+    <Property Name="LeaveFromDate" Type="datetime" Nullable="false" />
+    <Property Name="LeaveToDate" Type="datetime" Nullable="false" />
+    <Property Name="ApprovedDays" Type="int" />
+    <Property Name="ApprovedBy" Type="uniqueidentifier" />
+    <Property Name="ApprovedDate" Type="datetime" />
+    <Property Name="Reason" Type="varchar(max)" Nullable="false" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UsersProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="150" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="DisplayID" Type="nvarchar" MaxLength="150" />
+    <Property Name="Gender" Type="bit" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="WorkTitleID" Type="int" />
+    <Property Name="DOJ" Type="datetime" />
+    <Property Name="MartialStatus" Type="int" />
+    <Property Name="Address" Type="nvarchar" MaxLength="800" />
+    <Property Name="City" Type="nvarchar" MaxLength="150" />
+    <Property Name="State" Type="nvarchar" MaxLength="150" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="Country" Type="nvarchar" MaxLength="150" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="OtherEmailAddress" Type="nvarchar" MaxLength="250" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UsersReporting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RepotingToUserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsDirectRepoting" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UsersRole">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UsersWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="WorkTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="JoinDate" Type="datetime" Nullable="false" />
+    <Property Name="Loction" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WorkTitles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkTitle" Type="nvarchar" MaxLength="500" />
+    <Property Name="WorkDescription" Type="nvarchar" MaxLength="800" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UpdatedBy" Type="uniqueidentifier" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeaveSys.dbo.vw_Users_Info' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Users_Info">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="DisplayName" />
+    </Key>
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="300" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="200" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="150" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="301" Nullable="false" />
+    <Property Name="DisplayID" Type="nvarchar" MaxLength="150" />
+    <Property Name="IsTerminated" Type="bit" />
+    <Property Name="IsLockedOut" Type="bit" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeaveSys.dbo.vw_Users_ViewUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Users_ViewUsers">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="MiddleName" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="DisplayName" />
+      <PropertyRef Name="DisplayID" />
+      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="DOB" />
+      <PropertyRef Name="DOJ" />
+      <PropertyRef Name="Mobile" />
+      <PropertyRef Name="OtherEmailAddress" />
+    </Key>
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="301" Nullable="false" />
+    <Property Name="DisplayID" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="452" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="200" />
+    <Property Name="WorkTitleID" Type="int" />
+    <Property Name="WorkTitle" Type="varchar" MaxLength="500" />
+    <Property Name="DOB" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DOJ" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="OtherEmailAddress" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="IsLoginActive" Type="bit" />
+    <Property Name="IsUserActive" Type="bit" />
+  </EntityType>
+  <Association Name="FK_LeaveApply_ApprovedBy_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersLeaveApply" Type="Self.UsersLeaveApply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersLeaveApply">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaveApply_ToLeaveType">
+    <End Role="LeaveType" Type="Self.LeaveType" Multiplicity="1" />
+    <End Role="UsersLeaveApply" Type="Self.UsersLeaveApply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LeaveType">
+        <PropertyRef Name="LeaveTypeID" />
+      </Principal>
+      <Dependent Role="UsersLeaveApply">
+        <PropertyRef Name="LeaveTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaveApply_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersLeaveApply" Type="Self.UsersLeaveApply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersLeaveApply">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEducation_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersEducation" Type="Self.UsersEducation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersEducation">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEducation_ToUserDocuments">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersDocuments" Type="Self.UsersDocuments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersDocuments">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEmergencyContact_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersEmergencyContact" Type="Self.UsersEmergencyContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersEmergencyContact">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserExperience_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersExperience" Type="Self.UsersExperience" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersExperience">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfile_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersProfile" Type="Self.UsersProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersProfile">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserReporting_RepotingToUserID_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersReporting" Type="Self.UsersReporting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersReporting">
+        <PropertyRef Name="RepotingToUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserReporting_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersReporting" Type="Self.UsersReporting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersReporting">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_ToRole">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="UsersRole" Type="Self.UsersRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UsersRole">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersRole" Type="Self.UsersRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserWork_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersWork" Type="Self.UsersWork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersWork">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ufn_Roles_GetRoleByRoleID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="RoleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ufn_vw_Users_GetByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="ufn_WorkTitles_GetWorkTitleByWorkTitleID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="WorkTitleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ups_Roles_GetRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ups_Users_CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+    <Parameter Name="MiddleName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+    <Parameter Name="WorkTitleID" Type="int" Mode="In" />
+    <Parameter Name="RoleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ups_UsersProfile_GetByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="ups_UsersProfile_UpdateByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="MiddleName" Type="varchar" Mode="In" />
+    <Parameter Name="LastName" Type="varchar" Mode="In" />
+    <Parameter Name="WorkTitleID" Type="int" Mode="In" />
+    <Parameter Name="DOJ" Type="datetime" Mode="In" />
+    <Parameter Name="DisplayID" Type="varchar" Mode="In" />
+    <Parameter Name="Gender" Type="bit" Mode="In" />
+    <Parameter Name="DOB" Type="datetime" Mode="In" />
+    <Parameter Name="MartialStatus" Type="int" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="State" Type="varchar" Mode="In" />
+    <Parameter Name="ZipCode" Type="varchar" Mode="In" />
+    <Parameter Name="Country" Type="varchar" Mode="In" />
+    <Parameter Name="Mobile" Type="varchar" Mode="In" />
+    <Parameter Name="OtherEmailAddress" Type="varchar" Mode="In" />
+    <Parameter Name="UpdatedBy" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="ups_WorkTitle_GetWorkTitles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_Users_GetAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usp_Users_LoginUserByEmailandPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Users_UserRoles_ByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersEducation_Deactivate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="UpdatedBy" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersEducation_GetByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersEducation_GetByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersEducation_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Institute" Type="nvarchar" Mode="In" />
+    <Parameter Name="CourseSpecialization" Type="nvarchar" Mode="In" />
+    <Parameter Name="GPA" Type="decimal" Mode="In" />
+    <Parameter Name="StartPeriod" Type="nvarchar" Mode="In" />
+    <Parameter Name="EndPeriod" Type="nvarchar" Mode="In" />
+    <Parameter Name="Comments" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersEducation_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Institute" Type="nvarchar" Mode="In" />
+    <Parameter Name="CourseSpecialization" Type="nvarchar" Mode="In" />
+    <Parameter Name="GPA" Type="decimal" Mode="In" />
+    <Parameter Name="StartPeriod" Type="nvarchar" Mode="In" />
+    <Parameter Name="EndPeriod" Type="nvarchar" Mode="In" />
+    <Parameter Name="Comments" Type="nvarchar" Mode="In" />
+    <Parameter Name="UpdatedBy" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersEmergencyContact_Deactivate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="UpdatedBy" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersEmergencyContact_GetByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersEmergencyContact_GetByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersEmergencyContact_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Relationship" Type="nvarchar" Mode="In" />
+    <Parameter Name="Mobile" Type="nvarchar" Mode="In" />
+    <Parameter Name="WorkMobile" Type="nvarchar" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersEmergencyContact_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Relationship" Type="nvarchar" Mode="In" />
+    <Parameter Name="Mobile" Type="nvarchar" Mode="In" />
+    <Parameter Name="WorkMobile" Type="nvarchar" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+    <Parameter Name="UpdatedBy" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersExperience_Deactivate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="UpdatedBy" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersExperience_GetByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersExperience_GetByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersExperience_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="WorkTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="Company" Type="nvarchar" Mode="In" />
+    <Parameter Name="FromDate" Type="datetime" Mode="In" />
+    <Parameter Name="ToDate" Type="datetime" Mode="In" />
+    <Parameter Name="Comments" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersExperience_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="WorkTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="Company" Type="nvarchar" Mode="In" />
+    <Parameter Name="FromDate" Type="datetime" Mode="In" />
+    <Parameter Name="ToDate" Type="datetime" Mode="In" />
+    <Parameter Name="Comments" Type="nvarchar" Mode="In" />
+    <Parameter Name="UpdatedBy" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersReporting_GetByRepotingToUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RepotingToUserID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersReporting_GetByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="usp_UsersReporting_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="RepotingToUserID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="IsDirectRepoting" Type="bit" Mode="In" />
+    <Parameter Name="CreatedBy" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <EntityContainer Name="LeaveSysDataStoreContainer">
+    <EntitySet Name="LeaveType" EntityType="Self.LeaveType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersDocuments" EntityType="Self.UsersDocuments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersEducation" EntityType="Self.UsersEducation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersEmergencyContact" EntityType="Self.UsersEmergencyContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersExperience" EntityType="Self.UsersExperience" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersLeaveApply" EntityType="Self.UsersLeaveApply" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersProfile" EntityType="Self.UsersProfile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersReporting" EntityType="Self.UsersReporting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersRole" EntityType="Self.UsersRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersWork" EntityType="Self.UsersWork" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkTitles" EntityType="Self.WorkTitles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_Users_Info" EntityType="Self.vw_Users_Info" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Users_Info].[UserID] AS [UserID], 
+    [vw_Users_Info].[UserName] AS [UserName], 
+    [vw_Users_Info].[Email] AS [Email], 
+    [vw_Users_Info].[Password] AS [Password], 
+    [vw_Users_Info].[RoleID] AS [RoleID], 
+    [vw_Users_Info].[RoleName] AS [RoleName], 
+    [vw_Users_Info].[FirstName] AS [FirstName], 
+    [vw_Users_Info].[MiddleName] AS [MiddleName], 
+    [vw_Users_Info].[LastName] AS [LastName], 
+    [vw_Users_Info].[DisplayName] AS [DisplayName], 
+    [vw_Users_Info].[DisplayID] AS [DisplayID], 
+    [vw_Users_Info].[IsTerminated] AS [IsTerminated], 
+    [vw_Users_Info].[IsLockedOut] AS [IsLockedOut], 
+    [vw_Users_Info].[IsActive] AS [IsActive]
+    FROM [dbo].[vw_Users_Info] AS [vw_Users_Info]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_Users_ViewUsers" EntityType="Self.vw_Users_ViewUsers" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Users_ViewUsers].[UserID] AS [UserID], 
+    [vw_Users_ViewUsers].[Email] AS [Email], 
+    [vw_Users_ViewUsers].[FirstName] AS [FirstName], 
+    [vw_Users_ViewUsers].[MiddleName] AS [MiddleName], 
+    [vw_Users_ViewUsers].[LastName] AS [LastName], 
+    [vw_Users_ViewUsers].[DisplayName] AS [DisplayName], 
+    [vw_Users_ViewUsers].[DisplayID] AS [DisplayID], 
+    [vw_Users_ViewUsers].[FullName] AS [FullName], 
+    [vw_Users_ViewUsers].[RoleID] AS [RoleID], 
+    [vw_Users_ViewUsers].[RoleName] AS [RoleName], 
+    [vw_Users_ViewUsers].[WorkTitleID] AS [WorkTitleID], 
+    [vw_Users_ViewUsers].[WorkTitle] AS [WorkTitle], 
+    [vw_Users_ViewUsers].[DOB] AS [DOB], 
+    [vw_Users_ViewUsers].[DOJ] AS [DOJ], 
+    [vw_Users_ViewUsers].[Mobile] AS [Mobile], 
+    [vw_Users_ViewUsers].[OtherEmailAddress] AS [OtherEmailAddress], 
+    [vw_Users_ViewUsers].[IsLoginActive] AS [IsLoginActive], 
+    [vw_Users_ViewUsers].[IsUserActive] AS [IsUserActive]
+    FROM [dbo].[vw_Users_ViewUsers] AS [vw_Users_ViewUsers]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_LeaveApply_ApprovedBy_ToUser" Association="Self.FK_LeaveApply_ApprovedBy_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersLeaveApply" EntitySet="UsersLeaveApply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaveApply_ToLeaveType" Association="Self.FK_LeaveApply_ToLeaveType">
+      <End Role="LeaveType" EntitySet="LeaveType" />
+      <End Role="UsersLeaveApply" EntitySet="UsersLeaveApply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaveApply_ToUser" Association="Self.FK_LeaveApply_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersLeaveApply" EntitySet="UsersLeaveApply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEducation_ToUser" Association="Self.FK_UserEducation_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersEducation" EntitySet="UsersEducation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEducation_ToUserDocuments" Association="Self.FK_UserEducation_ToUserDocuments">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersDocuments" EntitySet="UsersDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEmergencyContact_ToUser" Association="Self.FK_UserEmergencyContact_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersEmergencyContact" EntitySet="UsersEmergencyContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserExperience_ToUser" Association="Self.FK_UserExperience_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersExperience" EntitySet="UsersExperience" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfile_ToUser" Association="Self.FK_UserProfile_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersProfile" EntitySet="UsersProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserReporting_RepotingToUserID_ToUser" Association="Self.FK_UserReporting_RepotingToUserID_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersReporting" EntitySet="UsersReporting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserReporting_ToUser" Association="Self.FK_UserReporting_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersReporting" EntitySet="UsersReporting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_ToRole" Association="Self.FK_UserRole_ToRole">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UsersRole" EntitySet="UsersRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_ToUser" Association="Self.FK_UserRole_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersRole" EntitySet="UsersRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserWork_ToUser" Association="Self.FK_UserWork_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersWork" EntitySet="UsersWork" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

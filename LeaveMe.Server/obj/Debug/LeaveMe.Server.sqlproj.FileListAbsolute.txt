@@ -1,0 +1,5 @@
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Server\bin\Debug\LeaveMe.Server.dacpac
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Server\bin\Debug\LeaveMe.Server.dll
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Server\bin\Debug\LeaveMe.Server.pdb
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Server\obj\Debug\LeaveMe.Server.dll
+E:\projects\LeaveApplication\LeaveMe\LeaveMe.Server\obj\Debug\LeaveMe.Server.pdb

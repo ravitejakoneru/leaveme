@@ -1,0 +1,887 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LeaveSys.Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="LeaveType">
+    <Key>
+      <PropertyRef Name="LeaveTypeID" />
+    </Key>
+    <Property Name="LeaveTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaveTypeName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LeaveTypeDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ColorCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="LeaveDays" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UsersLeaveApply" Relationship="Self.FK_LeaveApply_ToLeaveType" FromRole="LeaveType" ToRole="UsersLeaveApply" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="RoleDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UsersRole" Relationship="Self.FK_UserRole_ToRole" FromRole="Roles" ToRole="UsersRole" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="AccessFailedCount" Type="Int32" />
+    <Property Name="IsLockedOut" Type="Boolean" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsTerminated" Type="Boolean" />
+    <Property Name="TerminatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UsersLeaveApply" Relationship="Self.FK_LeaveApply_ApprovedBy_ToUser" FromRole="Users" ToRole="UsersLeaveApply" />
+    <NavigationProperty Name="UsersLeaveApply1" Relationship="Self.FK_LeaveApply_ToUser" FromRole="Users" ToRole="UsersLeaveApply" />
+    <NavigationProperty Name="UsersEducation" Relationship="Self.FK_UserEducation_ToUser" FromRole="Users" ToRole="UsersEducation" />
+    <NavigationProperty Name="UsersDocuments" Relationship="Self.FK_UserEducation_ToUserDocuments" FromRole="Users" ToRole="UsersDocuments" />
+    <NavigationProperty Name="UsersEmergencyContact" Relationship="Self.FK_UserEmergencyContact_ToUser" FromRole="Users" ToRole="UsersEmergencyContact" />
+    <NavigationProperty Name="UsersExperience" Relationship="Self.FK_UserExperience_ToUser" FromRole="Users" ToRole="UsersExperience" />
+    <NavigationProperty Name="UsersProfile" Relationship="Self.FK_UserProfile_ToUser" FromRole="Users" ToRole="UsersProfile" />
+    <NavigationProperty Name="UsersReporting" Relationship="Self.FK_UserReporting_RepotingToUserID_ToUser" FromRole="Users" ToRole="UsersReporting" />
+    <NavigationProperty Name="UsersReporting1" Relationship="Self.FK_UserReporting_ToUser" FromRole="Users" ToRole="UsersReporting" />
+    <NavigationProperty Name="UsersRole" Relationship="Self.FK_UserRole_ToUser" FromRole="Users" ToRole="UsersRole" />
+    <NavigationProperty Name="UsersWork" Relationship="Self.FK_UserWork_ToUser" FromRole="Users" ToRole="UsersWork" />
+  </EntityType>
+  <EntityType Name="UsersDocuments">
+    <Key>
+      <PropertyRef Name="DocumentID" />
+    </Key>
+    <Property Name="DocumentID" Type="Guid" Nullable="false" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="DocumentName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentTypeID" Type="Int32" Nullable="false" />
+    <Property Name="StorePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_UserEducation_ToUserDocuments" FromRole="UsersDocuments" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UsersEducation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="Institute" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CourseSpecialization" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GPA" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="StartPeriod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EndPeriod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_UserEducation_ToUser" FromRole="UsersEducation" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UsersEmergencyContact">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Relationship" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="WorkMobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_UserEmergencyContact_ToUser" FromRole="UsersEmergencyContact" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UsersExperience">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="WorkTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Company" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_UserExperience_ToUser" FromRole="UsersExperience" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UsersLeaveApply">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="LeaveTypeID" Type="Int32" Nullable="false" />
+    <Property Name="LeaveFromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LeaveToDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ApprovedDays" Type="Int32" />
+    <Property Name="ApprovedBy" Type="Guid" />
+    <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="LeaveType" Relationship="Self.FK_LeaveApply_ToLeaveType" FromRole="UsersLeaveApply" ToRole="LeaveType" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_LeaveApply_ApprovedBy_ToUser" FromRole="UsersLeaveApply" ToRole="Users" />
+    <NavigationProperty Name="Users1" Relationship="Self.FK_LeaveApply_ToUser" FromRole="UsersLeaveApply" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UsersProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="Boolean" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="WorkTitleID" Type="Int32" />
+    <Property Name="DOJ" Type="DateTime" Precision="3" />
+    <Property Name="MartialStatus" Type="Int32" />
+    <Property Name="Address" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="OtherEmailAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_UserProfile_ToUser" FromRole="UsersProfile" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UsersReporting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="RepotingToUserID" Type="Guid" Nullable="false" />
+    <Property Name="IsDirectRepoting" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_UserReporting_RepotingToUserID_ToUser" FromRole="UsersReporting" ToRole="Users" />
+    <NavigationProperty Name="Users1" Relationship="Self.FK_UserReporting_ToUser" FromRole="UsersReporting" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UsersRole">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK_UserRole_ToRole" FromRole="UsersRole" ToRole="Roles" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_UserRole_ToUser" FromRole="UsersRole" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UsersWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="WorkTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Loction" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_UserWork_ToUser" FromRole="UsersWork" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="WorkTitles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="WorkDescription" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="vw_Users_Info">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="DisplayName" />
+    </Key>
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="301" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="IsTerminated" Type="Boolean" />
+    <Property Name="IsLockedOut" Type="Boolean" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="vw_Users_ViewUsers">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="MiddleName" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="DisplayName" />
+      <PropertyRef Name="DisplayID" />
+      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="DOB" />
+      <PropertyRef Name="DOJ" />
+      <PropertyRef Name="Mobile" />
+      <PropertyRef Name="OtherEmailAddress" />
+    </Key>
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="301" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="452" FixedLength="false" Unicode="true" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="WorkTitleID" Type="Int32" />
+    <Property Name="WorkTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DOJ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OtherEmailAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsLoginActive" Type="Boolean" />
+    <Property Name="IsUserActive" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_LeaveApply_ToLeaveType">
+    <End Role="LeaveType" Type="Self.LeaveType" Multiplicity="1" />
+    <End Role="UsersLeaveApply" Type="Self.UsersLeaveApply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LeaveType">
+        <PropertyRef Name="LeaveTypeID" />
+      </Principal>
+      <Dependent Role="UsersLeaveApply">
+        <PropertyRef Name="LeaveTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_ToRole">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="UsersRole" Type="Self.UsersRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UsersRole">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaveApply_ApprovedBy_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersLeaveApply" Type="Self.UsersLeaveApply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersLeaveApply">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaveApply_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersLeaveApply" Type="Self.UsersLeaveApply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersLeaveApply">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEducation_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersEducation" Type="Self.UsersEducation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersEducation">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEducation_ToUserDocuments">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersDocuments" Type="Self.UsersDocuments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersDocuments">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEmergencyContact_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersEmergencyContact" Type="Self.UsersEmergencyContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersEmergencyContact">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserExperience_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersExperience" Type="Self.UsersExperience" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersExperience">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfile_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersProfile" Type="Self.UsersProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersProfile">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserReporting_RepotingToUserID_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersReporting" Type="Self.UsersReporting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersReporting">
+        <PropertyRef Name="RepotingToUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserReporting_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersReporting" Type="Self.UsersReporting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersReporting">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersRole" Type="Self.UsersRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserWork_ToUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersWork" Type="Self.UsersWork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersWork">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LeaveSysEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="LeaveType" EntityType="Self.LeaveType" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <EntitySet Name="UsersDocuments" EntityType="Self.UsersDocuments" />
+    <EntitySet Name="UsersEducation" EntityType="Self.UsersEducation" />
+    <EntitySet Name="UsersEmergencyContact" EntityType="Self.UsersEmergencyContact" />
+    <EntitySet Name="UsersExperience" EntityType="Self.UsersExperience" />
+    <EntitySet Name="UsersLeaveApply" EntityType="Self.UsersLeaveApply" />
+    <EntitySet Name="UsersProfile" EntityType="Self.UsersProfile" />
+    <EntitySet Name="UsersReporting" EntityType="Self.UsersReporting" />
+    <EntitySet Name="UsersRole" EntityType="Self.UsersRole" />
+    <EntitySet Name="UsersWork" EntityType="Self.UsersWork" />
+    <EntitySet Name="WorkTitles" EntityType="Self.WorkTitles" />
+    <EntitySet Name="vw_Users_Info" EntityType="Self.vw_Users_Info" />
+    <EntitySet Name="vw_Users_ViewUsers" EntityType="Self.vw_Users_ViewUsers" />
+    <AssociationSet Name="FK_LeaveApply_ToLeaveType" Association="Self.FK_LeaveApply_ToLeaveType">
+      <End Role="LeaveType" EntitySet="LeaveType" />
+      <End Role="UsersLeaveApply" EntitySet="UsersLeaveApply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_ToRole" Association="Self.FK_UserRole_ToRole">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UsersRole" EntitySet="UsersRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaveApply_ApprovedBy_ToUser" Association="Self.FK_LeaveApply_ApprovedBy_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersLeaveApply" EntitySet="UsersLeaveApply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaveApply_ToUser" Association="Self.FK_LeaveApply_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersLeaveApply" EntitySet="UsersLeaveApply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEducation_ToUser" Association="Self.FK_UserEducation_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersEducation" EntitySet="UsersEducation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEducation_ToUserDocuments" Association="Self.FK_UserEducation_ToUserDocuments">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersDocuments" EntitySet="UsersDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEmergencyContact_ToUser" Association="Self.FK_UserEmergencyContact_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersEmergencyContact" EntitySet="UsersEmergencyContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserExperience_ToUser" Association="Self.FK_UserExperience_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersExperience" EntitySet="UsersExperience" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfile_ToUser" Association="Self.FK_UserProfile_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersProfile" EntitySet="UsersProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserReporting_RepotingToUserID_ToUser" Association="Self.FK_UserReporting_RepotingToUserID_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersReporting" EntitySet="UsersReporting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserReporting_ToUser" Association="Self.FK_UserReporting_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersReporting" EntitySet="UsersReporting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_ToUser" Association="Self.FK_UserRole_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersRole" EntitySet="UsersRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserWork_ToUser" Association="Self.FK_UserWork_ToUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersWork" EntitySet="UsersWork" />
+    </AssociationSet>
+    <FunctionImport Name="ups_Roles_GetRoles" ReturnType="Collection(LeaveSys.Data.ups_Roles_GetRoles_Result)" />
+    <FunctionImport Name="ups_Users_CreateUser">
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Guid" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="MiddleName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="WorkTitleID" Mode="In" Type="Int32" />
+      <Parameter Name="RoleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ups_UsersProfile_GetByUserID" ReturnType="Collection(LeaveSys.Data.ups_UsersProfile_GetByUserID_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="ups_UsersProfile_UpdateByUserID">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="MiddleName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="WorkTitleID" Mode="In" Type="Int32" />
+      <Parameter Name="DOJ" Mode="In" Type="DateTime" />
+      <Parameter Name="DisplayID" Mode="In" Type="String" />
+      <Parameter Name="Gender" Mode="In" Type="Boolean" />
+      <Parameter Name="DOB" Mode="In" Type="DateTime" />
+      <Parameter Name="MartialStatus" Mode="In" Type="Int32" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="State" Mode="In" Type="String" />
+      <Parameter Name="ZipCode" Mode="In" Type="String" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="OtherEmailAddress" Mode="In" Type="String" />
+      <Parameter Name="UpdatedBy" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="ups_WorkTitle_GetWorkTitles" ReturnType="Collection(LeaveSys.Data.ups_WorkTitle_GetWorkTitles_Result)" />
+    <FunctionImport Name="usp_LeaveType_GetAll" ReturnType="Collection(LeaveSys.Data.usp_LeaveType_GetAll_Result)">
+      <Parameter Name="LeaveTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_LeaveType_Insert">
+      <Parameter Name="LeaveTypeName" Mode="In" Type="String" />
+      <Parameter Name="LeaveTypeDescription" Mode="In" Type="String" />
+      <Parameter Name="ColorCode" Mode="In" Type="String" />
+      <Parameter Name="LeaveDays" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_LeaveType_Update">
+      <Parameter Name="LeaveTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="LeaveTypeName" Mode="In" Type="String" />
+      <Parameter Name="LeaveTypeDescription" Mode="In" Type="String" />
+      <Parameter Name="ColorCode" Mode="In" Type="String" />
+      <Parameter Name="LeaveDays" Mode="In" Type="Int32" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+      <Parameter Name="UpdatedBy" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Users_GetAllUsers" ReturnType="Collection(LeaveSys.Data.usp_Users_GetAllUsers_Result)">
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Users_LoginUserByEmailandPassword" ReturnType="Collection(LeaveSys.Data.usp_Users_LoginUserByEmailandPassword_Result)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Users_UserRoles_ByUserID" ReturnType="Collection(LeaveSys.Data.usp_Users_UserRoles_ByUserID_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersEducation_Deactivate">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="UpdatedBy" Mode="In" Type="Guid" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersEducation_GetByID" ReturnType="Collection(LeaveSys.Data.usp_UsersEducation_GetByID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersEducation_GetByUserID" ReturnType="Collection(LeaveSys.Data.usp_UsersEducation_GetByUserID_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersEducation_Insert">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+      <Parameter Name="Institute" Mode="In" Type="String" />
+      <Parameter Name="CourseSpecialization" Mode="In" Type="String" />
+      <Parameter Name="GPA" Mode="In" Type="Decimal" />
+      <Parameter Name="StartPeriod" Mode="In" Type="String" />
+      <Parameter Name="EndPeriod" Mode="In" Type="String" />
+      <Parameter Name="Comments" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersEducation_Update">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+      <Parameter Name="Institute" Mode="In" Type="String" />
+      <Parameter Name="CourseSpecialization" Mode="In" Type="String" />
+      <Parameter Name="GPA" Mode="In" Type="Decimal" />
+      <Parameter Name="StartPeriod" Mode="In" Type="String" />
+      <Parameter Name="EndPeriod" Mode="In" Type="String" />
+      <Parameter Name="Comments" Mode="In" Type="String" />
+      <Parameter Name="UpdatedBy" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersEmergencyContact_Deactivate">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="UpdatedBy" Mode="In" Type="Guid" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersEmergencyContact_GetByID" ReturnType="Collection(LeaveSys.Data.usp_UsersEmergencyContact_GetByID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersEmergencyContact_GetByUserID" ReturnType="Collection(LeaveSys.Data.usp_UsersEmergencyContact_GetByUserID_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersEmergencyContact_Insert">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Relationship" Mode="In" Type="String" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="WorkMobile" Mode="In" Type="String" />
+      <Parameter Name="Notes" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersEmergencyContact_Update">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Relationship" Mode="In" Type="String" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="WorkMobile" Mode="In" Type="String" />
+      <Parameter Name="Notes" Mode="In" Type="String" />
+      <Parameter Name="UpdatedBy" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersExperience_Deactivate">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="UpdatedBy" Mode="In" Type="Guid" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersExperience_GetByID" ReturnType="Collection(LeaveSys.Data.usp_UsersExperience_GetByID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersExperience_GetByUserID" ReturnType="Collection(LeaveSys.Data.usp_UsersExperience_GetByUserID_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersExperience_Insert">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+      <Parameter Name="WorkTitle" Mode="In" Type="String" />
+      <Parameter Name="Company" Mode="In" Type="String" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Comments" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersExperience_Update">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+      <Parameter Name="WorkTitle" Mode="In" Type="String" />
+      <Parameter Name="Company" Mode="In" Type="String" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Comments" Mode="In" Type="String" />
+      <Parameter Name="UpdatedBy" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersReporting_DeletetByUserID">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+      <Parameter Name="RepotingToUserID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersReporting_GetByRepotingToUserID" ReturnType="Collection(LeaveSys.Data.usp_UsersReporting_GetByRepotingToUserID_Result)">
+      <Parameter Name="RepotingToUserID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersReporting_GetByUserID" ReturnType="Collection(LeaveSys.Data.usp_UsersReporting_GetByUserID_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UsersReporting_Insert">
+      <Parameter Name="UserID" Mode="In" Type="Guid" />
+      <Parameter Name="RepotingToUserID" Mode="In" Type="Guid" />
+      <Parameter Name="IsDirectRepoting" Mode="In" Type="Boolean" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Guid" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="ups_Roles_GetRoles_Result">
+    <Property Type="Int32" Name="RoleID" Nullable="false" />
+    <Property Type="String" Name="RoleName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="RoleDescription" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="ups_UsersProfile_GetByUserID_Result">
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="WorkTitleID" Nullable="true" />
+    <Property Type="String" Name="WorkTitle" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="DisplayID" Nullable="true" MaxLength="150" />
+    <Property Type="DateTime" Name="DOJ" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="Gender" Nullable="true" />
+    <Property Type="DateTime" Name="DOB" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="MartialStatus" Nullable="true" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="800" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="OtherEmailAddress" Nullable="true" MaxLength="250" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="Guid" Name="CreatedBy" Nullable="false" />
+    <Property Type="Guid" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="ups_WorkTitle_GetWorkTitles_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="WorkTitle" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="usp_LeaveType_GetAll_Result">
+    <Property Type="Int32" Name="LeaveTypeID" Nullable="false" />
+    <Property Type="String" Name="LeaveTypeName" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="LeaveTypeDescription" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="ColorCode" Nullable="true" MaxLength="8" />
+    <Property Type="Int32" Name="LeaveDays" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="Guid" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Guid" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_Users_GetAllUsers_Result">
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="MiddleName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="301" />
+    <Property Type="String" Name="DisplayID" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="RoleID" Nullable="false" />
+    <Property Type="String" Name="RoleName" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="WorkTitleID" Nullable="true" />
+    <Property Type="String" Name="WorkTitle" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="DOB" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DOJ" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Mobile" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="OtherEmailAddress" Nullable="false" MaxLength="250" />
+    <Property Type="Boolean" Name="IsLoginActive" Nullable="true" />
+    <Property Type="Boolean" Name="IsUserActive" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_Users_LoginUserByEmailandPassword_Result">
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="300" />
+    <Property Type="String" Name="RoleName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="301" />
+    <Property Type="String" Name="DisplayID" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="usp_Users_UserRoles_ByUserID_Result">
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="RoleName" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="usp_UsersEducation_GetByID_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Institute" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="CourseSpecialization" Nullable="false" MaxLength="250" />
+    <Property Type="Decimal" Name="GPA" Nullable="true" Precision="4" Scale="2" />
+    <Property Type="String" Name="StartPeriod" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="EndPeriod" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Comments" Nullable="true" MaxLength="800" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="Guid" Name="CreatedBy" Nullable="false" />
+    <Property Type="Guid" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_UsersEducation_GetByUserID_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Institute" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="CourseSpecialization" Nullable="false" MaxLength="250" />
+    <Property Type="Decimal" Name="GPA" Nullable="true" Precision="4" Scale="2" />
+    <Property Type="String" Name="StartPeriod" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="EndPeriod" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Comments" Nullable="true" MaxLength="800" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="Guid" Name="CreatedBy" Nullable="false" />
+    <Property Type="Guid" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_UsersEmergencyContact_GetByID_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Relationship" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Mobile" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="WorkMobile" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="500" />
+    <Property Type="Guid" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Guid" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_UsersEmergencyContact_GetByUserID_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Relationship" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Mobile" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="WorkMobile" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="500" />
+    <Property Type="Guid" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Guid" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_UsersExperience_GetByID_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="WorkTitle" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Company" Nullable="false" MaxLength="150" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Comments" Nullable="true" MaxLength="500" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="Guid" Name="CreatedBy" Nullable="false" />
+    <Property Type="Guid" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_UsersExperience_GetByUserID_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="WorkTitle" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Company" Nullable="false" MaxLength="150" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Comments" Nullable="true" MaxLength="500" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="Guid" Name="CreatedBy" Nullable="false" />
+    <Property Type="Guid" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_UsersReporting_GetByRepotingToUserID_Result">
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="UserDisplayName" Nullable="true" MaxLength="500" />
+    <Property Type="Guid" Name="RepotingToUserID" Nullable="false" />
+    <Property Type="String" Name="RepotingToUserDisplayName" Nullable="true" MaxLength="500" />
+    <Property Type="Boolean" Name="IsDirectRepoting" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="Guid" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_UsersReporting_GetByUserID_Result">
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="UserDisplayName" Nullable="true" MaxLength="500" />
+    <Property Type="Guid" Name="RepotingToUserID" Nullable="false" />
+    <Property Type="String" Name="RepotingToUserDisplayName" Nullable="true" MaxLength="500" />
+    <Property Type="Boolean" Name="IsDirectRepoting" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="Guid" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+  </ComplexType>
+</Schema>
