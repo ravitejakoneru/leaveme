@@ -1,0 +1,92 @@
+﻿@model LeaveMe.ViewModels.UsersEmergencyContactViewModel
+
+@{
+    ViewBag.Title = "Emergency Contact Details";
+    ViewBag.PageHeaderTitle = "Emergency Contact";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+}
+
+
+ @if(Model.UsersEmergencyContactList.Count > 0)
+ { 
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Emergency Contacts 
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="divEmergencyContactList">
+                    @{ Html.RenderPartial("_EmergencyContactList", Model); }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ }
+ 
+<hr /> 
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        * indicates mandatory fields
+        @if (Model.Id > 0)
+        {
+            <div class="pull-right">
+                @Ajax.ActionLink("Add Emergency Contact", "Emergency", "Profile", new { Area = "User", UserID = Model.UserID },
+                new AjaxOptions() { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "divEmergencyContact" },
+                         htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+            </div>
+        }
+
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="divEmergencyContact">
+                    @{ Html.RenderPartial("_EmergencyContact", Model); }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <script type="text/javascript">
+            $(function () {
+                var availableRelationships = [
+                  "Mother",
+                  "Father",
+                  "Brother",
+                  "Sister",
+                  "Son",
+                  "Daughter",
+                  "Grandfather",
+                  "Grandmother",
+                  "Grandson",
+                  "Granddaughter",
+                  "Friend",
+                  "Spouse",
+                  "Nephew",
+                  "Niece",
+                  "Employee",
+                  "Caretaker",
+                  "Uncle",
+                  "Aunt"
+                ];
+                $("#Relationship").autocomplete({
+                    source: availableRelationships,
+                    minLength: 2
+                });
+            });
+        </script>
+    }
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+﻿CREATE TABLE [dbo].[UsersDocuments]
+(
+	[DocumentID] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+	[UserID] UNIQUEIDENTIFIER NOT NULL, 
+	[DocumentName] NVARCHAR(250),
+	[DocumentTypeID] INT NOT NULL,
+	[StorePath] NVARCHAR(MAX) NOT NULL, 
+	[IsActive] BIT NULL DEFAULT 1, 
+	[CreatedBy] UNIQUEIDENTIFIER NOT NULL, 
+	[UpdatedBy] UNIQUEIDENTIFIER NULL, 
+	[CreatedDate] DATETIME NOT NULL DEFAULT (getdate()) , 
+	[UpdatedDate] DATETIME NULL, 
+	CONSTRAINT [FK_UserEducation_ToUserDocuments] FOREIGN KEY ([UserID]) REFERENCES [Users]([UserID]) 
+)

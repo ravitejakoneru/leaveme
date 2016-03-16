@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A9700FB3-7936-4DCB-90BD-E3B8DD1770B6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeaveMe.Data</RootNamespace>
+    <AssemblyName>LeaveMe.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LeaveSys.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeaveSys.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeaveSys.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeaveSys.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeaveSys.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="LeaveType.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Roles.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ups_Roles_GetRoles_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ups_UsersProfile_GetByUserID_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ups_WorkTitle_GetWorkTitles_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersDocuments.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersEducation.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersEmergencyContact.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersExperience.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersLeaveApply.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersProfile.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersReporting.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersRole.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersWork.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_LeaveType_GetAll_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_UsersEducation_GetByID_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_UsersEducation_GetByUserID_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_UsersEmergencyContact_GetByID_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_UsersEmergencyContact_GetByUserID_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_UsersExperience_GetByID_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_UsersExperience_GetByUserID_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_UsersReporting_GetByRepotingToUserID_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_UsersReporting_GetByUserID_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Users_GetAllUsers_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Users_LoginUserByEmailandPassword_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Users_UserRoles_ByUserID_Result.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_Users_Info.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_Users_ViewUsers.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkTitles.cs">
+      <DependentUpon>LeaveSys.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="LeaveSys.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LeaveSys.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="LeaveSys.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LeaveSys.edmx</DependentUpon>
+      <LastGenOutput>LeaveSys.Context.cs</LastGenOutput>
+    </None>
+    <None Include="LeaveSys.edmx.diagram">
+      <DependentUpon>LeaveSys.edmx</DependentUpon>
+    </None>
+    <None Include="LeaveSys.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LeaveSys.edmx</DependentUpon>
+      <LastGenOutput>LeaveSys.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

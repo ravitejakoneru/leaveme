@@ -1,0 +1,16 @@
+﻿CREATE TABLE [dbo].[UsersEmergencyContact]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[UserID] UNIQUEIDENTIFIER NOT NULL, 
+	[Name] NVARCHAR(150) NOT NULL, 
+	[Relationship] NVARCHAR(150) NOT NULL, 
+	[Mobile] NVARCHAR(20) NOT NULL, 
+	[WorkMobile] NVARCHAR(20) NULL, 
+	[Notes] VARCHAR(500) NULL, 
+	[IsActive] BIT NULL DEFAULT 1, 
+	[CreatedBy] UNIQUEIDENTIFIER NOT NULL, 
+	[UpdatedBy] UNIQUEIDENTIFIER NULL, 
+	[CreatedDate] DATETIME NOT NULL DEFAULT (getdate()) , 
+	[UpdatedDate] DATETIME NULL 
+	CONSTRAINT [FK_UserEmergencyContact_ToUser] FOREIGN KEY ([UserID]) REFERENCES [Users]([UserID])
+)

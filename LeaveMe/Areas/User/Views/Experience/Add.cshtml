@@ -1,0 +1,116 @@
+﻿@model LeaveMe.ViewModels.UsersExperienceViewModel
+
+@{
+    ViewBag.Title = "Work Experience";
+    ViewBag.PageHeaderTitle = "Work Experience";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        * indicates mandatory fields
+        @if (Model.Id > 0)
+        {
+            <div class="pull-right">
+                @Html.ActionLink("Add Work Experience", "Add", "Experience", new { Area = "User", UserID = Model.UserID },
+                 htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+            </div>
+        }
+
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.UserID)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Company, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.WorkTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.WorkTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.WorkTitle, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.Comments,  htmlAttributes : new { @class = "form-control" } )
+                                @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                                @if (Model.Id > 0)
+                                {
+                                    @Html.ActionLink("Delete", "DeleteExperience", "Experience", new { Area = "User", UserID = Model.UserID, Id = Model.Id },
+                                    htmlAttributes: new { @class = "btn btn-danger" })
+                                }
+                                else
+                                {
+                                    <input class="btn btn-danger" type="reset" value="Reset">
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        &nbsp;
+        <div class="pull-right">
+            @Html.ActionLink("View Work Experience", "Experiences", "Experience", new { Area = "User", UserID = Model.UserID },
+                 htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function () { // will trigger when the document is ready
+            $('.datepicker').datepicker({
+                weekStart: 1,
+                autoclose: true,
+                todayHighlight: true,
+                format: 'mm/dd/yyyy'
+            }); //Initialise any date pickers
+        });
+    </script>
+}

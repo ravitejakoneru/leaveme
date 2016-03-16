@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>LeaveMe.Server</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{5b42aa4d-3104-4f95-85b1-e0b76f870ef2}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>LeaveMe.Server</RootNamespace>
+    <AssemblyName>LeaveMe.Server</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <GenerateCreateScript>True</GenerateCreateScript>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatTSqlWarningsAsErrors>True</TreatTSqlWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Snapshots" />
+    <Folder Include="StoredProcedures" />
+    <Folder Include="Functions" />
+    <Folder Include="Views" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Roles.sql" />
+    <Build Include="Tables\Users.sql" />
+    <Build Include="Tables\UsersProfile.sql" />
+    <Build Include="Tables\UsersEmergencyContact.sql" />
+    <Build Include="Tables\UsersWork.sql" />
+    <Build Include="Tables\WorkTitles.sql" />
+    <Build Include="Tables\UsersExperience.sql" />
+    <Build Include="Tables\UsersEducation.sql" />
+    <Build Include="Tables\UsersDocuments.sql" />
+    <Build Include="Tables\LeaveType.sql" />
+    <Build Include="Tables\UsersLeaveApply.sql" />
+    <Build Include="Tables\UsersReporting.sql" />
+    <Build Include="Tables\Log4Net_Error.sql" />
+    <Build Include="StoredProcedures\usp_Users_LoginUserByEmailandPassword.sql" />
+    <Build Include="Views\vw_Users_Info.sql" />
+    <Build Include="StoredProcedures\usp_Users_UserRoles_ByUserID.sql" />
+    <Build Include="StoredProcedures\ups_UsersProfile_GetByUserID.sql" />
+    <Build Include="StoredProcedures\ups_UsersProfile_UpdateByUserID.sql" />
+    <Build Include="StoredProcedures\ups_Users_CreateUser.sql" />
+    <Build Include="StoredProcedures\ups_Roles_GetRoles.sql" />
+    <Build Include="StoredProcedures\ups_WorkTitle_GetWorkTitles.sql" />
+    <Build Include="Functions\ufn_WorkTitles_GetWorkTitleByWorkTitleID.sql" />
+    <Build Include="Functions\ufn_Roles_GetRoleByRoleID.sql" />
+    <Build Include="Views\vw_Users_ViewUsers.sql" />
+    <Build Include="StoredProcedures\usp_Users_GetAllUsers.sql" />
+    <Build Include="StoredProcedures\usp_UsersEmergencyContact_Insert.sql" />
+    <Build Include="StoredProcedures\usp_UsersEmergencyContact_Update.sql" />
+    <Build Include="StoredProcedures\usp_UsersEmergencyContact_GetByUserID.sql" />
+    <Build Include="StoredProcedures\usp_UsersEmergencyContact_Deactivate.sql" />
+    <Build Include="StoredProcedures\usp_UsersExperience_Insert.sql" />
+    <Build Include="StoredProcedures\usp_UsersExperience_Update.sql" />
+    <Build Include="StoredProcedures\usp_UsersExperience_GetByUserID.sql" />
+    <Build Include="StoredProcedures\usp_UsersExperience_Deactivate.sql" />
+    <Build Include="StoredProcedures\usp_UsersExperience_GetByID.sql" />
+    <Build Include="StoredProcedures\usp_UsersEmergencyContact_GetByID.sql" />
+    <Build Include="StoredProcedures\usp_UsersEducation_Insert.sql" />
+    <Build Include="StoredProcedures\usp_UsersEducation_Update.sql" />
+    <Build Include="StoredProcedures\usp_UsersEducation_GetByUserID.sql" />
+    <Build Include="StoredProcedures\usp_UsersEducation_GetByID.sql" />
+    <Build Include="StoredProcedures\usp_UsersEducation_Deactivate.sql" />
+    <Build Include="StoredProcedures\usp_UsersReporting_Insert.sql" />
+    <Build Include="Functions\ufn_vw_Users_GetByUserID.sql" />
+    <Build Include="StoredProcedures\usp_UsersReporting_GetByUserID.sql" />
+    <Build Include="StoredProcedures\usp_UsersReporting_GetByRepotingToUserID.sql" />
+    <Build Include="StoredProcedures\usp_UsersReporting_DeletetByUserID.sql" />
+    <Build Include="StoredProcedures\usp_LeaveType_Insert.sql" />
+    <Build Include="StoredProcedures\usp_LeaveType_Update.sql" />
+    <Build Include="StoredProcedures\usp_LeaveType_GetAll.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="LeaveMe.Server.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\UsersRole.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Snapshots\LeaveMe.Server_20151227_23-52-22.dacpac" />
+    <None Include="LeaveMe.Server.publish.xml" />
+  </ItemGroup>
+</Project>

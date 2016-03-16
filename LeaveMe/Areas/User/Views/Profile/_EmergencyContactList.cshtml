@@ -1,0 +1,45 @@
+﻿@model LeaveMe.ViewModels.UsersEmergencyContactViewModel
+
+<div class="table-responsive">
+    <table id="dtUsers" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Relationship
+                </th>
+                <th>
+                    Mobile
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.UsersEmergencyContactList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Relationship)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
+                    <td>
+                        @Ajax.ActionLink("View", "Emergency", "Profile", new { Area = "User", UserID = item.UserID, Id = item.Id },
+                     new AjaxOptions() { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "divEmergencyContact" },
+                     htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+                     
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

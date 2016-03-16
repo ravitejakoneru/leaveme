@@ -1,0 +1,18 @@
+﻿CREATE TABLE [dbo].[Users]
+(
+	[UserID] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+	[UserName] NVARCHAR(50) NULL, 
+	[Email] NVARCHAR(300) NOT NULL, 
+	[Password] NVARCHAR(300) NULL, 
+	[AccessFailedCount] INT NULL DEFAULT 0, 
+	[IsLockedOut] BIT NULL DEFAULT 0, 
+	[IsActive] BIT NULL DEFAULT 1,
+	[IsTerminated] BIT NULL DEFAULT 0,
+	[TerminatedDate] DATETIME NULL,
+	[CreatedBy] UNIQUEIDENTIFIER NOT NULL, 
+	[UpdatedBy] UNIQUEIDENTIFIER NULL, 
+	[CreatedDate] DATETIME NOT NULL DEFAULT (getdate()) , 
+	[UpdatedDate] DATETIME NULL, 
+	CONSTRAINT [CK_Users_Email] UNIQUE (Email) 
+
+)

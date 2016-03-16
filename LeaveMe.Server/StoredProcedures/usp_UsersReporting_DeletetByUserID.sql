@@ -1,0 +1,11 @@
+﻿CREATE PROCEDURE [dbo].[usp_UsersReporting_DeletetByUserID]
+@UserID UNIQUEIDENTIFIER,
+@RepotingToUserID UNIQUEIDENTIFIER
+AS
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+BEGIN
+
+	DELETE [dbo].[UsersReporting]
+	WHERE UserID =@UserID AND RepotingToUserID=@RepotingToUserID 
+		
+END

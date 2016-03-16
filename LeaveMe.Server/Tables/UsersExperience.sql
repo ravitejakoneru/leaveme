@@ -1,0 +1,16 @@
+﻿CREATE TABLE [dbo].[UsersExperience]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[UserID] UNIQUEIDENTIFIER NOT NULL, 
+	[WorkTitle] NVARCHAR(150) NOT NULL, 
+	[Company] NVARCHAR(150) NOT NULL, 
+	[FromDate] DATETIME NOT NULL, 
+	[ToDate] DATETIME NOT NULL, 
+	[Comments] NVARCHAR(500) NULL,
+	[IsActive] BIT NULL DEFAULT 1, 
+	[CreatedBy] UNIQUEIDENTIFIER NOT NULL, 
+	[UpdatedBy] UNIQUEIDENTIFIER NULL, 
+	[CreatedDate] DATETIME NOT NULL DEFAULT (getdate()) , 
+	[UpdatedDate] DATETIME NULL, 
+	CONSTRAINT [FK_UserExperience_ToUser] FOREIGN KEY ([UserID]) REFERENCES [Users]([UserID]) 
+)

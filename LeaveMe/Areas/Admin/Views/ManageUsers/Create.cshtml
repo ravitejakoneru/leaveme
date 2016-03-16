@@ -1,0 +1,118 @@
+﻿@model LeaveMe.ViewModels.CreateUserViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>Add User </h4>
+
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.roleID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.roleID, Model.RolesList,"- Select User Role -", htmlAttributes : new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.roleID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div id="divRoleDescription" style="display:none" class="alert alert-success alert-dismissable">
+            <button type="button" id="btnhide" class="close" onclick="$('#divRoleDescription').hide()" aria-hidden="true">×</button>
+            <div id="divResultRoleDescription"></div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.email,  htmlAttributes : new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.password, htmlAttributes : new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.firstName,  htmlAttributes : new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.middleName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.middleName,  htmlAttributes : new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.middleName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.lastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.lastName,  htmlAttributes : new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.workTitleID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.workTitleID, Model.WorkTitleList, "- Select User Recognition -",  htmlAttributes : new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.workTitleID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            $("#roleID").change(function () {
+                var _roleID = parseInt($('#roleID option:selected').val());
+                $.ajax({
+                    url: "@Url.Action("GetRoleDescriptionByRoleID", "Validation", new { Area = "" })",
+                    data: { RoleID: _roleID },
+                    dataType: "JSON",
+                    type: "GET",
+                    error: function () {
+                        alert("An error occurred.");
+                    },
+                    success: function (data) {
+                        if (data.Result != '') {
+                            $('#divRoleDescription').show();
+                            $('#divResultRoleDescription').html(data.Result);
+
+                        }
+                    }
+                });
+            });
+            $("#password").focus(function () {
+                this.type = "text";
+            }).blur(function () {
+                this.type = "password";
+            });
+        });
+    </script>
+}

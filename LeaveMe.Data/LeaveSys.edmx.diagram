@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="84c8586338ad48ecaadeb5421fb098bb" Name="Diagram1">
+        <EntityTypeShape EntityType="LeaveSys.Data.LeaveType" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.Roles" Width="1.5" PointX="0.75" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.Users" Width="1.5" PointX="0.75" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.UsersDocuments" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.UsersEducation" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.UsersEmergencyContact" Width="1.5" PointX="3" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.UsersExperience" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.UsersLeaveApply" Width="1.5" PointX="6" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.UsersProfile" Width="1.5" PointX="3" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.UsersReporting" Width="1.5" PointX="3" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.UsersRole" Width="1.5" PointX="3" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.UsersWork" Width="1.5" PointX="3" PointY="43.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.WorkTitles" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.vw_Users_Info" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveSys.Data.vw_Users_ViewUsers" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="LeaveSys.Data.FK_LeaveApply_ToLeaveType" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_UserRole_ToRole" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_LeaveApply_ApprovedBy_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_LeaveApply_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_UserEducation_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_UserEducation_ToUserDocuments" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_UserEmergencyContact_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_UserExperience_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_UserProfile_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_UserReporting_RepotingToUserID_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_UserReporting_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_UserRole_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveSys.Data.FK_UserWork_ToUser" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

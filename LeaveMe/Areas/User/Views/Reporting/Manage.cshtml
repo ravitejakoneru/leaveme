@@ -1,0 +1,179 @@
+﻿@model LeaveMe.ViewModels.ReportingToViewModel
+
+@{
+    ViewBag.Title = "Manage Users Reporting";
+    ViewBag.PageHeaderTitle = "Reporting";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<div class="panel-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.Label("Select Reporting To",htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select id="selReportingTo" data-option="@Model.SelectedRepotingToUserID" style="width: 50%" multiple="multiple">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.HiddenFor(model => model.UserID)
+                        @Html.HiddenFor(model => model.ManagedBy)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Users Reporting To", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select id="selUsersReporting" data-option="@Model.SelectedUserReportingTo" style="width: 50%" multiple="multiple">
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <script type="text/javascript">
+
+            var $selectReportingTo = $('#selReportingTo');
+            var $selUsersReporting = $('#selUsersReporting');
+
+            var $userid = $('#UserID');
+            var $managedBy = $('#ManagedBy');
+
+            $(function () { // will trigger when the document is ready
+                fn_SetSelectedValues($selectReportingTo);
+                fn_SetSelectedValues($selUsersReporting);
+
+                $selectReportingTo.select2({
+                    multiple: true,
+                    tokenSeparators: [',', ' '],
+                    ajax: {
+                        url: "@Url.Action("GetUsersFullNameAndWorkTitleByLetter", "Validation", new { Area = "" })",
+                        dataType: "json",
+                        type: "GET",
+                        data: function (params) {
+                            var queryParameters = {
+                                term: params.term
+                            }
+                            return queryParameters;
+                        },
+                        processResults: function (data) {
+                            var search = data.Result;
+                            return {
+                                results: $.map(search, function (item) {
+                                    return {
+                                        text: item.value,
+                                        id: item.id
+                                    }
+                                })
+                            };
+                        },
+                        initSelection: true 
+                    }
+                });
+                //$selectReportingTo.val("9e69ef85-e8bb-45df-95ed-c1f529ede1f4").trigger("change");
+                $selectReportingTo.on("select2:select", function (e) {
+                    var selectedUser = e.params.data.id;
+                    var userid = $userid.val();
+                    fn_ManageUserReportingto(userid, selectedUser, 0);
+                });
+
+                $selectReportingTo.on("select2:unselect", function (e) {
+                    var selectedUser = e.params.data.id;
+                    var userid = $userid.val();
+                    fn_ManageUserReportingto(userid, selectedUser, 1);
+                });
+
+                /// users reporting to selected user
+
+                $selUsersReporting.select2({
+                    multiple: true,
+                    tokenSeparators: [',', ' '],
+                    ajax: {
+                        url: "@Url.Action("GetUsersFullNameAndWorkTitleByLetter", "Validation", new { Area = "" })",
+                        dataType: "json",
+                        type: "GET",
+                        data: function (params) {
+                            var queryParameters = {
+                                term: params.term
+                            }
+                            return queryParameters;
+                        },
+                        processResults: function (data) {
+                            var search = data.Result;
+                            return {
+                                results: $.map(search, function (item) {
+                                    return {
+                                        text: item.value,
+                                        id: item.id
+                                    }
+                                })
+                            };
+                        }
+                    }
+                });
+
+                $selUsersReporting.on("select2:select", function (e) {
+                    var userid = e.params.data.id;
+                    var selectedUser = $userid.val();
+                    fn_ManageUserReportingto(userid, selectedUser, 0);
+                });
+
+                $selUsersReporting.on("select2:unselect", function (e) {
+                    var userid = e.params.data.id;
+                    var selectedUser = $userid.val();
+                    fn_ManageUserReportingto(userid, selectedUser, 1);
+                });
+
+                fn_SetSelectedValues($selUsersReporting);
+
+            });
+
+            function fn_ManageUserReportingto(userid, reportingTo, isUserDeleted) {
+
+                var managedBy = $managedBy.val();
+                var reportingModel = {};
+
+                reportingModel.UserID = userid;
+                reportingModel.ManagedBy = managedBy;
+                reportingModel.RepotingToUserID = reportingTo;
+                reportingModel.IsUserDelete = isUserDeleted;
+
+                $.ajax({
+                    url: "@Url.Action("ManageUserReportingTo", "Reporting", new { Area = "User" })",
+                    type: "POST",
+                    data: "{reportingModel:" + JSON.stringify(reportingModel) + "}",
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: "json",
+                    error: function (err) {
+                        console.log(err.error);
+                    },
+                    success: function (response) {
+                        response.d;
+                    }
+                });
+            }
+
+            function fn_SetSelectedValues(element) {
+                var _data = element.data('option');
+                for (i = 0; i < _data.length; i++) {
+                    element.append($("<option/>", {
+                        value: _data[i].id,
+                        text: _data[i].value,
+                        selected: true
+                    }));
+                }
+            }
+           
+        </script>
+    }
+

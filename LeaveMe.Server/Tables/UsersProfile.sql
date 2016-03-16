@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[UsersProfile]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[UserID] UNIQUEIDENTIFIER NOT NULL,
+	[FirstName] NVARCHAR(150) NOT NULL, 
+	[MiddleName] NVARCHAR(150) NULL, 
+	[LastName] NVARCHAR(150) NOT NULL, 
+	[DisplayID] NVARCHAR(150) NULL, 
+	[Gender] BIT NULL, 
+	[DOB] DATETIME NULL, 
+	[WorkTitleID] INT NULL , 
+	[DOJ] DATETIME NULL, 
+	[MartialStatus] INT NULL, 
+	[Address] NVARCHAR(800) NULL, 
+	[City] NVARCHAR(150) NULL, 
+	[State] NVARCHAR(150) NULL, 
+	[ZipCode] NVARCHAR(10) NULL, 
+	[Country] NVARCHAR(150) NULL, 
+	[Mobile] NVARCHAR(20) NULL, 
+	[OtherEmailAddress] NVARCHAR(250) NULL, 
+	[IsActive] BIT NULL DEFAULT 1, 
+	[CreatedBy] UNIQUEIDENTIFIER NOT NULL, 
+	[UpdatedBy] UNIQUEIDENTIFIER NULL, 
+	[CreatedDate] DATETIME NOT NULL DEFAULT (getdate()) , 
+	[UpdatedDate] DATETIME NULL 
+	CONSTRAINT [FK_UserProfile_ToUser] FOREIGN KEY ([UserID]) REFERENCES [Users]([UserID])
+
+)

@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "401 Access denied";
+    if (User.Roles.Contains("Administrator"))
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+    }
+}
+
+<section class="content">
+
+    <div class="error-page">
+        <h2 class="headline text-red">401</h2>
+
+        <div class="error-content">
+            <h3><i class="fa fa-warning text-red"></i> Oops! Something went wrong.</h3>
+
+            <p>
+                Sorry, you do not have permission to view this page..
+            </p>
+
+        </div>
+    </div>
+    <!-- /.error-page -->
+
+</section>
+

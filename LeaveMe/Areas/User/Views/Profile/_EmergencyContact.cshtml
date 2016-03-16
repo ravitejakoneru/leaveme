@@ -1,0 +1,73 @@
+﻿@model LeaveMe.ViewModels.UsersEmergencyContactViewModel
+
+@using (Ajax.BeginForm("Emergency", "Profile", new { Area = "User", UserID = Model.UserID }, new AjaxOptions()
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "divEmergencyContactList",
+    InsertionMode = InsertionMode.Replace,
+}, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+       
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.UserID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Relationship, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Relationship, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Mobile, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WorkMobile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.WorkMobile, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.WorkMobile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", @rows = "3" })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @if (Model.Id > 0) { 
+                    @Ajax.ActionLink("Delete", "EmergencyDelete", "Profile", new { Area = "User", UserID = Model.UserID, Id = Model.Id },
+                         new AjaxOptions() { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "divEmergencyContact" },
+                  htmlAttributes: new { @class = "btn btn-danger" })
+                }
+                else
+                {
+                  <input class="btn btn-danger" type="reset" value="Reset">
+                }
+            </div>
+        </div>
+    </div>
+}

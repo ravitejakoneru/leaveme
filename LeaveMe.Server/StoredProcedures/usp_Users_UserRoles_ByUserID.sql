@@ -1,0 +1,7 @@
+﻿CREATE PROCEDURE [dbo].[usp_Users_UserRoles_ByUserID]
+	@UserID uniqueidentifier
+AS
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+BEGIN
+	SELECT UserID, RoleName FROM vw_Users_Info
+END	
